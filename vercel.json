@@ -1,0 +1,8 @@
+{
+    "routes": [
+      {
+        "src": "/api/(.*)",
+        "dest": "https://health-connect-backend.vercel.app/api/$1"
+      }
+    ]
+  }

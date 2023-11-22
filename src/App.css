@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@200;300;400;800&family=Outfit&display=swap');
+
+/* Auth page Styling */
+.loginBgStyle {
+    position: relative;
+}
+.loginBgStyle:before {
+    content: "";
+    min-height: 250px;
+    height: 10vh;
+    width: 100%;
+    background: linear-gradient(90deg, rgba(178, 211, 250, 0.29) 0%, rgba(134, 174, 235, 0.44) 36.77%, rgba(90, 137, 220, 0.91) 74.27%, #2F65CE 100%);
+    position: absolute;
+    z-index: -2;
+}
+.loginBgStyleBox{
+    position: relative;
+    width: 800px;
+    max-width: 90vw;
+    padding-top: 40px;
+    margin: auto;
+    min-height: 80vh;
+    z-index: 1;
+}
+.loginBgStyleBox::before{
+    content: "";
+    height: 250px;
+    width: 100%;
+    background: white;
+    position: absolute;
+    border-radius: 15px;
+    z-index: 0;
+}
+.profileLabel{
+    margin-left: 5px;
+    font-family: "Outfit";
+}
+.profileValue{
+    padding: 3px 8px;
+    border: 2px solid rgba(0, 0, 0, 0.16);
+    border-radius: 6px;
+    margin: 2px;
+    width: 100%;
+}

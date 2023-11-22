@@ -1,0 +1,46 @@
+.ml-40{
+    margin-left: 15px;
+}
+.doctorCard{
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    background:rgba(217, 217, 217, 0.5);
+    border:2.5px solid rgba(0, 0, 0, 0.16);
+    border-radius: 5px;
+    margin: 2px;
+    min-width: 500px;
+    width: 75vw;
+}
+.doctorCardText{
+    width: 80%;
+}
+
+.doctorCard p{
+    margin-bottom: 5px;
+}
+.doctorCard .DoctorName{
+    font-family: 'Assistant';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.5rem;
+    line-height: 24px;
+    color: #000000;
+}
+
+.doctorCard .experiense{
+    font-family: 'Assistant';
+    font-style: normal;
+    font-weight: 200;
+    font-size: 1rem;
+    line-height: 16px;
+    color: #000000;
+}
+
+.doctorCard .doctorIntro{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.90rem;
+    color: #000000;
+}
