@@ -12,7 +12,8 @@ const Doctors = () => {
     background: "rgba(217, 217, 217, 0.5)",
     border: "2.5px solid rgba(0, 0, 0, 0.16)",
     borderRadius: "50px",
-    width: "40%",
+    width: "20%",
+    minWidth:"100px",
     color: "#ffffff",
   };
   const homeButton = {
@@ -32,10 +33,10 @@ const Doctors = () => {
   const {loading,doctors} = useSelector((state) => state.doctors);
   return (
     <VStack gap={3} m={"30px"}>
-      <HStack width={"60vw"} justify={"center"}>
+      {/* <HStack width={"60vw"} justify={"center"}>
         <Input style={homeSearchInput} placeholder="Specialty or  Name " />
         <Button style={homeButton}>Search</Button>
-      </HStack>
+      </HStack> */}
       <DoctorFilter onSubmit={handleFilterSubmit}/>
         {
             loading?<Loader/>:doctors.map((e)=>{return <DoctorCard doctor={e}/>})

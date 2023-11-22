@@ -38,44 +38,43 @@ const DoctorFilter = ({ onSubmit }) => {
         const newDistrict = event.target.value;
         setCity(newDistrict);
       };
+      const homeSearchInput = {
+        background: "rgba(217, 217, 217, 0.5)",
+        border: "2.5px solid rgba(0, 0, 0, 0.16)",
+        borderRadius: "50px",
+        width: "20%",
+        minWidth:"200px",
+      };
+      const homeButton = {
+        backgroundColor: "rgba(76, 148, 229, 0.84)",
+        borderRadius: "50px",
+        fontFamily: "'Outfit', sans-serif",
+        fontWeight: 400,
+        color: "white",
+      };
   return (
     <form onSubmit={handleSubmit}>
-    <HStack spacing={3} justify={"center"} wrap={"wrap"} w={"90vw"} m={"auto"} border={"2.5px solid rgba(0, 0, 0, 0.16)"} p={5} borderRadius={5}>
-      <FormControl w={"250px"}>
-        <FormLabel>Name</FormLabel>
-        <Input type="text" value={name} onChange={(e) => setName(e.target.value)}/>
-      </FormControl>
-      <FormControl w={"250px"}>
-        <FormLabel>State:</FormLabel>
-      <Select onChange={handleStateChange} value={state}>
-        <option value="">Select a state</option>
+    <HStack wrap={"wrap"} justify={"center"} w={"90vw"}>
+        <Input style={homeSearchInput} type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder='Doctor name'/>
+
+      <Select style={homeSearchInput} onChange={handleStateChange} w={"200px"} value={state} placeholder='Select State'>
         {states.map((state) => (
           <option key={state} value={state}>
             {state}
           </option>
         ))}
       </Select>
-      </FormControl>
-      <FormControl w={"250px"}>
-        <FormLabel>City:</FormLabel>
-      <Select onChange={handleDistrictChange} value={city}>
+      <Select style={homeSearchInput} w={"200px"} onChange={handleDistrictChange} value={city}>
         <option value="">Select a district</option>
         {districts.map((district) => (
           <option key={district} value={district}>
             {district}
           </option>
         ))}
-      </Select>
-      </FormControl>
-      <FormControl w={"250px"}>
-        <FormLabel>Rating:</FormLabel>     
-        <Input type="number" value={rating} onChange={(e) => setRating(e.target.value)} />
-      </FormControl>
-      <FormControl w={"250px"}>
-        <FormLabel>Specialization:</FormLabel>     
-        <Input type="text" value={specialization} onChange={(e) => setSpecialization(e.target.value)} />
-      </FormControl>
-      <Button type="submit">Search</Button>
+      </Select>  
+        <Input style={homeSearchInput} type="number" value={rating} onChange={(e) => setRating(e.target.value)} placeholder='Rating'/>
+        <Input style={homeSearchInput} type="text" value={specialization} onChange={(e) => setSpecialization(e.target.value)} placeholder='Specialization'/>
+      <Button style={homeButton} type="submit">Search</Button>
     </HStack>
     </form>
   );
