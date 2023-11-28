@@ -6,6 +6,7 @@ import { doctorLogout } from "../../store/Doctor/DoctorAction";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import logo from "./../../images/logo.png"
+import { analyserLogout } from "../../store/Analyser/AnalyserAction";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ const Navbar = () => {
   
   const { isAuthenticatedUser, user } = useSelector((state) => state.user);
   const { isAuthenticatedDoctor, doctor } = useSelector((state) => state.doctor);
+  const { isAuthenticatedAnalyser, analyser } = useSelector((state) => state.analyser);
   
   const userLogoutHandler = () => {
     dispatch(userLogout());
@@ -24,22 +26,27 @@ const Navbar = () => {
     dispatch(doctorLogout());
     navigate("/");
   }
+  const analyserLogoutHandler = () => {
+    dispatch(analyserLogout());
+    navigate("/");
+  }
 
   return (
     <Flex px="4" py="1" wrap="wrap">
       <Box display="flex" gap={7} alignItems="center">
         <Link to="/"><Image src={logo} alt="Clinic On Cloud"/></Link>
-        {!isAuthenticatedDoctor && <Link to="/doctors">
+      </Box>
+      <Spacer />
+      <Flex gap={2}>
+        {!isAuthenticatedDoctor && !isAuthenticatedAnalyser && <Link to="/doctors">
           <Button _hover={buttonStyle} transition="all 0.2s">
             Find Doctor
           </Button>
         </Link>}
-      </Box>
-      <Spacer />
-      <Flex gap={2}>
-        {!isAuthenticatedUser && !isAuthenticatedDoctor && (
+
+        {!isAuthenticatedUser && !isAuthenticatedDoctor && !isAuthenticatedAnalyser && (
           <Link to="/login">
-            <Button>Login</Button>
+            <Button _hover={buttonStyle} transition="all 0.2s">Login</Button>
           </Link>
         )}
 
@@ -87,6 +94,27 @@ const Navbar = () => {
                   <MenuItem>Reviews</MenuItem>
                 </Link>
                 <MenuItem onClick={() => doctorLogoutHandler()}>
+                  Logout
+                </MenuItem>
+              </MenuList>
+            </Menu>
+        )}
+        {isAuthenticatedAnalyser && (
+            <Menu>
+              <MenuButton>
+                <Avatar name={analyser.name} src={(analyser)?analyser.image.url:"https://bit.ly/dan-abramov"} />
+              </MenuButton>
+              <MenuList>
+                <Link to="/analyser/profile">
+                  <MenuItem>Profile</MenuItem>
+                </Link>
+                <Link to="/analyser/country">
+                  <MenuItem>Country</MenuItem>
+                </Link>
+                <Link to="/analyser/state">
+                  <MenuItem>State</MenuItem>
+                </Link>
+                <MenuItem onClick={() => analyserLogoutHandler()}>
                   Logout
                 </MenuItem>
               </MenuList>

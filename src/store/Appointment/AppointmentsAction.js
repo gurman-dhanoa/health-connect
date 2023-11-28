@@ -153,3 +153,29 @@ export const analyserAppointments = createAsyncThunk(
     }
   }
 )
+
+export const analyserCityAppointments = createAsyncThunk(
+  'analyserCityAppointments',
+  async (data,{ rejectWithValue }) => {
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+      const result = await axios.get(
+        `/api/v1/analyser/cityAppointments`,
+        {params:data},
+        config
+      )
+      return result.data;
+    } catch (error) {
+    // return custom error message from backend if present
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message)
+      } else {
+        return rejectWithValue(error.message)
+      }
+    }
+  }
+)

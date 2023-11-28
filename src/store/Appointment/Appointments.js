@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { userUpcomingAppointments,doctorUpcomingAppointments, doctorCompletedAppointments, userPrivateAppointments, userClosedAppointments, analyserAppointments } from './AppointmentsAction';
+import { userUpcomingAppointments,doctorUpcomingAppointments, doctorCompletedAppointments, userPrivateAppointments, userClosedAppointments, analyserAppointments, analyserCityAppointments } from './AppointmentsAction';
 
 const initialState = {
     loading : false,
@@ -99,6 +99,21 @@ export const appointments = createSlice({
             state.success = true
         },
         [analyserAppointments.rejected]:(state,{payload})=>{
+            state.loading = false
+            state.error = payload
+            state.success = false
+        },
+        [analyserCityAppointments.pending]:(state)=>{
+            state.loading = true
+            state.error = null
+            state.success = false
+        },
+        [analyserCityAppointments.fulfilled]:(state,{payload})=>{
+            state.loading = false
+            state.appointments = payload.appointments
+            state.success = true
+        },
+        [analyserCityAppointments.rejected]:(state,{payload})=>{
             state.loading = false
             state.error = payload
             state.success = false

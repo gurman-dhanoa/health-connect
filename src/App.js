@@ -30,22 +30,31 @@ import UserRegister from "./pages/user/auth/Register";
 import UserProfile from "./pages/user/Profile";
 import UserAppointments from "./pages/user/appointments/Appointments";
 import PrivateAppointments from "./pages/user/appointments/PrivateAppointments";
+import UserRecords from "./pages/user/appointments/Records";
+
+// Analyser
+import AnalyserLogin from "./pages/analyser/auth/Login";
+import AnalyserRegister from "./pages/analyser/auth/Register";
+import { checkAnalyser } from "./store/Analyser/AnalyserAction";
+import AnalyserCountry from "./pages/analyser/AnalyserCountry";
+import AnalyserState from "./pages/analyser/AnalyserState";
 
 // Routes
 import {DoctorAuth,DoctorUnAuth} from "./routes/DoctorAuth";
-import UserRecords from "./pages/user/appointments/Records";
-import AnalyserApp from "./pages/analyser/AnalyserApp";
+import AnalyserProfile from "./pages/analyser/Profile";
 
 function App() {
   const user = useSelector((state) => state.user);
   const doctor = useSelector((state) => state.doctor);
+  const analyser = useSelector((state) => state.analyser);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(checkUser());
     dispatch(checkDoctor());
+    dispatch(checkAnalyser());
   }, []);
 
-  return (user.loading && doctor.loading) ? (
+  return (user.loading && doctor.loading && analyser.loading) ? (
     <Loader />
   ) : (
     <BrowserRouter>
@@ -74,7 +83,11 @@ function App() {
           <Route exact path="/user/records" element={<UserRecords/>} />
 
           {/* Analyser Routes */}
-          <Route exact path="/analyser" element={<AnalyserApp/>} />
+          <Route exact path="/analyser/login" element={<AnalyserLogin/>} />
+          <Route exact path="/analyser/Register" element={<AnalyserRegister/>} />
+          <Route exact path="/analyser/profile" element={<AnalyserProfile/>} />
+          <Route exact path="/analyser/country" element={<AnalyserCountry/>} />
+          <Route exact path="/analyser/state" element={<AnalyserState/>} />
 
           {/* Not found */}
           <Route path='*' exact={true} element={<ErrorPage/>} />
