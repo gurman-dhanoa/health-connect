@@ -1,8 +1,13 @@
-import { Button, HStack, Input, Select } from '@chakra-ui/react';
-import { City, State } from 'country-state-city';
 import React, { useEffect, useState } from 'react';
+import { Button, HStack, Input, Select, Text, VStack, useDisclosure } from '@chakra-ui/react';
+import { City, State } from 'country-state-city';
+import { Drawer, DrawerBody, DrawerFooter, DrawerHeader, DrawerOverlay, DrawerContent, DrawerCloseButton, } from '@chakra-ui/react'
+import { HamburgerIcon } from '@chakra-ui/icons';
 
 const DoctorFilter = ({ onSubmit }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const btnRef = React.useRef()
+
   const [name, setName] = useState('');
   const [state, setState] = useState('');
   const [city, setCity] = useState('');
@@ -41,7 +46,7 @@ const DoctorFilter = ({ onSubmit }) => {
   const homeSearchInput = {
     background: "transparent",
     border: "1px solid white",
-    borderRadius:"0px",
+    borderRadius: "0px",
     borderBottom: "2px solid gray",
     width: "20%",
     minWidth: "200px",
@@ -54,30 +59,48 @@ const DoctorFilter = ({ onSubmit }) => {
     color: "white",
   };
   return (
-    <form onSubmit={handleSubmit}>
-      <HStack p={2} maxW={"80dvw"} mx={"auto"} justify={"center"} border={"2px solid lightgray"} borderRadius={4} wrap={"wrap"} gap={4}>
-        <Input style={homeSearchInput} type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder='Doctor name' />
+    <>
+      <HStack onClick={onOpen} cursor={"pointer"} fontSize={"xl"} w={"80dvw"} mx={"auto"}><HamburgerIcon /><Text fontFamily = {'"Lexend Deca", sans-serif'} fontWeight = {600}>Search and Filter</Text></HStack>
+      <Drawer
+        isOpen={isOpen}
+        placement='left'
+        onClose={onClose}
+        finalFocusRef={btnRef}
+      >
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader>Search and Filter</DrawerHeader>
 
-        <Select style={homeSearchInput} onChange={handleStateChange} w={"200px"} value={state} placeholder='Select State'>
-          {states.map((state) => (
-            <option key={state} value={state}>
-              {state}
-            </option>
-          ))}
-        </Select>
-        <Select style={homeSearchInput} w={"200px"} onChange={handleDistrictChange} value={city}>
-          <option value="">Select a district</option>
-          {districts.map((district) => (
-            <option key={district} value={district}>
-              {district}
-            </option>
-          ))}
-        </Select>
-        <Input style={homeSearchInput} type="number" value={rating} onChange={(e) => setRating(e.target.value)} placeholder='Rating' />
-        <Input style={homeSearchInput} type="text" value={specialization} onChange={(e) => setSpecialization(e.target.value)} placeholder='Specialization' />
-        <Button style={homeButton} type="submit">Search</Button>
-      </HStack>
-    </form>
+          <DrawerBody>
+            <form onSubmit={handleSubmit}>
+              <VStack p={2} mx={"auto"} justify={"center"} gap={4}>
+                <Input style={homeSearchInput} type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder='Doctor name' />
+
+                <Select style={homeSearchInput} onChange={handleStateChange} w={"200px"} value={state} placeholder='Select State'>
+                  {states.map((state) => (
+                    <option key={state} value={state}>
+                      {state}
+                    </option>
+                  ))}
+                </Select>
+                <Select style={homeSearchInput} w={"200px"} onChange={handleDistrictChange} value={city}>
+                  <option value="">Select a district</option>
+                  {districts.map((district) => (
+                    <option key={district} value={district}>
+                      {district}
+                    </option>
+                  ))}
+                </Select>
+                <Input style={homeSearchInput} type="number" value={rating} onChange={(e) => setRating(e.target.value)} placeholder='Rating' />
+                <Input style={homeSearchInput} type="text" value={specialization} onChange={(e) => setSpecialization(e.target.value)} placeholder='Specialization' />
+                <Button style={homeButton} type="submit">Search</Button>
+              </VStack>
+            </form>
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
+    </>
   );
 };
 
