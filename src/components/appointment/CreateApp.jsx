@@ -10,29 +10,20 @@ import {
 } from "@chakra-ui/react";
 import {
   useDisclosure,
-  Button,
   FormControl,
   FormLabel,
   Input,
 } from "@chakra-ui/react";
 import React from "react";
+import Button from "../elements/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { createNewAppointment } from "../../store/Appointment/AppointmentAction";
 import { clearAppError } from "../../store/Appointment/Appointment";
 
-const CreateAppointment = ({status,id}) => {
-  const {isAuthenticatedUser} = useSelector((state)=>state.user);
-  const {error,success} = useSelector((state)=>state.appointment);
+const CreateAppointment = ({ id }) => {
+  const { error, success } = useSelector((state) => state.appointment);
   const toast = useToast();
-  const style = {
-    background: "rgba(76, 148, 230, 0.84)",
-    borderRadius: "50px",
-    fontFamily: "Outfit",
-    fontWeight: 400,
-    color: "#FFFDFD",
-    fontSize: "0.85rem",
-  };
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
@@ -62,10 +53,10 @@ const CreateAppointment = ({status,id}) => {
   };
   return (
     <>
-      {isAuthenticatedUser && status &&
-      <Button onClick={onOpen} style={style}>
-        Book Now
-      </Button>}
+
+      <Button onClick={onOpen} h={"30px"} fontSize={"sm"}>
+        Book an Appointment
+      </Button>
 
       <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
@@ -83,7 +74,7 @@ const CreateAppointment = ({status,id}) => {
                 <FormLabel>Comment</FormLabel>
                 <Textarea type="text" {...register("comment")} />
               </FormControl>
-              <Button type="submit" style={style} mt={3}>
+              <Button type="submit" mt={3}>
                 Book Now
               </Button>
             </form>

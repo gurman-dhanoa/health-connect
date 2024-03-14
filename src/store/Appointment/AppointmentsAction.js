@@ -179,3 +179,28 @@ export const analyserCityAppointments = createAsyncThunk(
     }
   }
 )
+
+export const userRecordForDoc = createAsyncThunk(
+  'userRecordForDoc',
+  async (id,{ rejectWithValue }) => {
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+      const result = await axios.get(
+        `/api/v1/doctor/userApp/${id}`,
+        config
+      )
+      return result.data;
+    } catch (error) {
+    // return custom error message from backend if present
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message)
+      } else {
+        return rejectWithValue(error.message)
+      }
+    }
+  }
+)

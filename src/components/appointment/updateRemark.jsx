@@ -10,11 +10,11 @@ import {
 } from "@chakra-ui/react";
 import {
   useDisclosure,
-  Button,
   FormControl,
   FormLabel,
   Input,
 } from "@chakra-ui/react";
+import Button from "./../elements/Button"
 import React, { useState } from "react";
 import {
   updateRemark,
@@ -22,7 +22,7 @@ import {
 import { useDispatch } from "react-redux";
 import { userUpcomingAppointments } from "./../../store/Appointment/AppointmentsAction";
 import { useForm } from "react-hook-form";
-import { MdEditCalendar } from "react-icons/md";
+import { MdDone } from "react-icons/md";
 import { createReview } from "../../store/User/UserAction";
 
 const UpdateRemark = (props) => {
@@ -45,7 +45,12 @@ const UpdateRemark = (props) => {
   };
   return (
     <>
-      <MdEditCalendar onClick={onOpen} />
+      <Button onClick={onOpen} bg="#63B775" h="25px" gap="4px">
+
+      <MdDone />
+      Completed
+
+      </Button>
       <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>

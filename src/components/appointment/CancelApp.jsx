@@ -1,10 +1,11 @@
-import { AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Button, useDisclosure, useToast } from "@chakra-ui/react";
+import { AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, useDisclosure, useToast } from "@chakra-ui/react";
 import React from "react";
 import { deleteAppointment } from "./../../store/Appointment/AppointmentAction";
 import { useDispatch, useSelector } from "react-redux";
 import { userUpcomingAppointments } from "./../../store/Appointment/AppointmentsAction";
 import { MdDeleteOutline } from "react-icons/md";
 import { clearAppError } from "../../store/Appointment/Appointment";
+import Button from "../elements/Button";
 
 const CancelAppointment = (props) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -40,7 +41,10 @@ const CancelAppointment = (props) => {
 
     return (
       <>
-        <MdDeleteOutline onClick={onOpen}/>
+        <Button onClick={onOpen} bg="#A71111B5" h="25px" gap="4px">
+        <MdDeleteOutline/>
+        Delete
+        </Button>
   
         <AlertDialog
           isOpen={isOpen}

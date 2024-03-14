@@ -5,6 +5,7 @@ import analyserReducer from './Analyser/Analyser'
 import doctorsReducer from './Doctor/Doctors'
 import appointmentsReducer from './Appointment/Appointments'
 import appointmentReducer from './Appointment/Appointment'
+import recordsReducer from './Appointment/Records'
 export const store = configureStore({
   reducer: {
     user:userReducer,
@@ -13,5 +14,6 @@ export const store = configureStore({
     doctors:doctorsReducer,
     appointments:appointmentsReducer,
     appointment:appointmentReducer,
+    records:recordsReducer,
   },
 });

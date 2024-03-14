@@ -1,18 +1,19 @@
-import { Avatar, Box, Button, Flex, Image, Menu, MenuButton, MenuItem, MenuList, Spacer,
+import { Avatar, Box, Flex, Image, Menu, MenuButton, MenuItem, MenuList, useMediaQuery,
 } from "@chakra-ui/react";
+import Button from "./../elements/Button"
 import React from "react";
 import { userLogout } from "../../store/User/UserAction";
 import { doctorLogout } from "../../store/Doctor/DoctorAction";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import logo from "./../../images/logo.png"
+import logo from "./../../images/logo.svg"
+import smallLogo from "./../../images/smallLogo.svg"
 import { analyserLogout } from "../../store/Analyser/AnalyserAction";
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
-  const buttonStyle = { bg: "blue.400", color: "white" };
+  const [isSmallerThan768] = useMediaQuery('(max-width: 768px)');
   
   const { isAuthenticatedUser, user } = useSelector((state) => state.user);
   const { isAuthenticatedDoctor, doctor } = useSelector((state) => state.doctor);
@@ -32,21 +33,20 @@ const Navbar = () => {
   }
 
   return (
-    <Flex px="4" py="1" wrap="wrap">
+    <Flex m={"auto"} width={"80dvw"} justify={"space-between"} my={3}>
       <Box display="flex" gap={7} alignItems="center">
-        <Link to="/"><Image src={logo} alt="Clinic On Cloud"/></Link>
+        <Link to="/"><Image src={isSmallerThan768?smallLogo:logo} alt="Health Connect"/></Link>
       </Box>
-      <Spacer />
-      <Flex gap={2}>
+      <Flex gap={3} align={"center"}>
         {!isAuthenticatedDoctor && !isAuthenticatedAnalyser && <Link to="/doctors">
-          <Button _hover={buttonStyle} transition="all 0.2s">
+          <Button className="button">
             Find Doctor
           </Button>
         </Link>}
 
         {!isAuthenticatedUser && !isAuthenticatedDoctor && !isAuthenticatedAnalyser && (
           <Link to="/login">
-            <Button _hover={buttonStyle} transition="all 0.2s">Login</Button>
+            <Button className="button">Join</Button>
           </Link>
         )}
 

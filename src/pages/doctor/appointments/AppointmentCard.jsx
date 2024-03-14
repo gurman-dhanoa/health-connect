@@ -6,6 +6,7 @@ import { MdOutlineDateRange } from "react-icons/md";
 import AlloteAppointment from "../../../components/appointment/AlloteApp";
 import UpdateAppointment from "../../../components/appointment/UpdateApp";
 import { IoOpenOutline } from "react-icons/io5";
+import UserRecForDoc from "../../../components/appointment/UserRecForDoc";
 
 const AppointmentCard = ({ appointment }) => {
   return (
@@ -22,7 +23,7 @@ const AppointmentCard = ({ appointment }) => {
         <Text fontWeight={600} fontSize={"20px"} lineHeight={"25px"}>
           {appointment.userId.name}
         </Text>
-        <HStack>{appointment.status === "NEW" && <AlloteAppointment id={appointment._id}/>}{appointment.status === "ALLOTED" && <UpdateAppointment id={appointment._id}/>}<IoOpenOutline /></HStack>
+        <HStack>{appointment.status === "NEW" && <AlloteAppointment id={appointment._id}/>}{appointment.status === "ALLOTED" && <UpdateAppointment id={appointment._id}/>}<UserRecForDoc userId={appointment.userId._id}/></HStack>
       </HStack>
       <Text fontSize={"14px"} lineHeight={"17px"} color={"#8A8A8A"}>
         Age : {appointment.age}

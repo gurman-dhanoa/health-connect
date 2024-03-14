@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { userUpcomingAppointments,doctorUpcomingAppointments, doctorCompletedAppointments, userPrivateAppointments, userClosedAppointments, analyserAppointments, analyserCityAppointments } from './AppointmentsAction';
+import { userUpcomingAppointments,doctorUpcomingAppointments, doctorCompletedAppointments, userPrivateAppointments, userClosedAppointments, analyserAppointments, analyserCityAppointments, userRecordForDoc } from './AppointmentsAction';
 
 const initialState = {
     loading : false,
